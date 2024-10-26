@@ -1,11 +1,9 @@
 Bacteria betty;
 Bacteria [] betties = new Bacteria[500];
 boolean away = false;
-PImage wand;
 
 void setup() {
   size(500, 500);
-  wand = loadImage("resized_optimized.png");
   betty = new Bacteria();
   for (int i = 0; i < betties.length; i++) {
     betties[i] = new Bacteria((int)(Math.random()*500), (int)(Math.random()*500)); 
@@ -13,17 +11,18 @@ void setup() {
 }
 
 void draw() {
-  image(wand, 50,50,10,10);
-  cursor(wand);
   background(255);
+  textSize(40);
+  text("Click to do some magic!", 20,40);
+  wand();
   betty.show();
   betty.move();
     if (away == false) {
      textSize(20);
-    text("Charging magic....", 250,100);
+    text("Charging spell...", 20,70);
   } else {
     textSize(20);
-    text("Shooting spell!", 250, 100);
+    text("Shooting spell!", 20, 70);
   }
   for (int i = 0; i < betties.length; i++) {
     betties[i].show();
@@ -37,6 +36,12 @@ void mousePressed() {
   } else {
     away = false;
   }
+}
+
+void wand(){
+  fill(250,219,93);
+  rect(mouseX, mouseY, 5,70);
+  ellipse(mouseX+3, mouseY-7, 20,20);
 }
 
 class Bacteria {
@@ -56,7 +61,7 @@ class Bacteria {
   void show() {
     fill(bactcolor);
     noStroke();
-    ellipse(myX, myY, 10, 10);
+    ellipse(myX, myY, 7, 7);
   }
 
   void move() {
@@ -72,7 +77,7 @@ class Bacteria {
         myY = myY + (int)(Math.random()*5) -3;
       }
     } else {
-      if (myX > mouseX && myX < 400) {
+      if (myX > mouseX) {
         myX = myX + (int)(Math.random()*5) - 1;
       } else {
         myX = myX + (int)(Math.random()*5) - 3;
@@ -85,4 +90,3 @@ class Bacteria {
     }
   }
 }
-
